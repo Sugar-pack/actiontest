@@ -18,7 +18,7 @@ jobs:
       - name: allowed message
         run: echo "Allowed to run"
   allowed-forked:
-    name: Allowed action
+    name: Allowed fork
     runs-on: ubuntu-latest
     if: ${{ github.actor == 'dependabot[bot]' }} || contains(github.event.pull_request.labels.*.name, 'safe-to-test')
     steps:
