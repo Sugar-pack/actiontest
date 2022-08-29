@@ -7,8 +7,19 @@ on:
     branches: [ "main" ]
 
 jobs:
+  allowed:
+    name: Allowed
+    runs-on: ubuntu-latest
+    if: |
+      github.event_name == 'workflow_dispatch' ||
+      github.ref == 'refs/heads/master' ||
+      (github.event.pull_request.head.repo.full_name == github.repository && github.actor != 'dependabot[bot]')
+    steps:
+      - name: allowed message
+        run: echo "Allowed to run"
 
   build:
+    needs: allowed
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3

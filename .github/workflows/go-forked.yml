@@ -1,0 +1,35 @@
+name: Go forked
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  allowed-forked:
+    name: Allowed action
+    runs-on: ubuntu-latest
+    if: ${{ github.actor == 'dependabot[bot]' }} || contains(github.event.pull_request.labels.*.name, 'safe-to-test')
+    steps:
+      - name: allowed message
+        run: echo "Allowed to run"
+  build:
+    needs: allowed-forked
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{github.event.pull_request.head.ref}}
+          repository: ${{github.event.pull_request.head.repo.full_name}}
+          submodules: recursive
+
+      - name: Set up Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: 1.18
+
+      - name: Build
+        run: go build -v ./...
+
+
