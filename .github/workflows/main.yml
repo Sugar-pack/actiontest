@@ -23,7 +23,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           FILE_TO_COMMIT: atlas.mongodb.com_atlasprojects.yaml
           DESTINATION_BRANCH: ${{ github.event.inputs.branch }}
-          run: |
+        run: |
             git checkout -b $DESTINATION_BRANCH
             ulimit -s ${{ github.event.inputs.ulimit }}
             ulimit -a
