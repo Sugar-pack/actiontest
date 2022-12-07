@@ -24,7 +24,6 @@ jobs:
           FILE_TO_COMMIT: atlas.mongodb.com_atlasprojects.yaml
           DESTINATION_BRANCH: ${{ github.event.inputs.branch }}
         run: |
-            git checkout -b $DESTINATION_BRANCH
             ulimit -s ${{ github.event.inputs.ulimit }}
             ulimit -a
             export TODAY=$( date -u '+%Y-%m-%d' )
