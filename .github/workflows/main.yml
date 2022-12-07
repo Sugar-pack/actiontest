@@ -24,8 +24,6 @@ jobs:
           FILE_TO_COMMIT: atlas.mongodb.com_atlasprojects.yaml
           DESTINATION_BRANCH: ${{ github.event.inputs.branch }}
         run: |
-            ulimit -s ${{ github.event.inputs.ulimit }}
-            ulimit -a
             export TODAY=$( date -u '+%Y-%m-%d' )
             export MESSAGE="chore: regenerate $FILE_TO_COMMIT for $TODAY"
             export SHA=$( git rev-parse $DESTINATION_BRANCH:$FILE_TO_COMMIT )
