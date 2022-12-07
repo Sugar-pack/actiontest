@@ -9,3 +9,7 @@ jobs:
     steps:
       - name: Check ulimit size
         run: ulimit -a
+      - name: change it
+        run: ulimit -s 163840
+      - name: Check ulimit size 2
+        run: ulimit -a 
